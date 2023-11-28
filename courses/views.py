@@ -44,7 +44,7 @@ class IsAuthor(permissions.BasePermission):
 class CourseList(generics.ListCreateAPIView):
     serializer_class = CourseSerializer
     authentication_classes = [authentication.TokenAuthentication]
-    permission_classes = [permissions.IsAuthenticated, IsClassCourseOwnedBy]
+    permission_classes = [permissions.IsAuthenticated, IsAuthor]
 
     def get_queryset(self):
         author = self.request.user
@@ -64,7 +64,7 @@ class CourseDetail(generics.RetrieveUpdateDestroyAPIView):
 class CourseClassList(generics.ListCreateAPIView):
     serializer_class = CourseClassSerializer
     authentication_classes = [authentication.TokenAuthentication]
-    permission_classes = [permissions.IsAuthenticated, IsCourseOwnedBy]
+    permission_classes = [permissions.IsAuthenticated, IsClassCourseOwnedBy]
 
     def get_queryset(self):
         course = self.kwargs['course']
