@@ -13,7 +13,7 @@ jobs:
         run: sudo apt install python3-pip
       - name: Install requirements
         run: pip install -r requirements.txt
-      - name: Execute tests
+      - name: Execute linting and tests
         env:
           DJANGO_SETTINGS_MODULE: learnwebdev.settings
-        run: flake8
+        run: flake8 && python manage.py test
