@@ -10,11 +10,17 @@ class CourseCommonInfo(models.Model):
         null=True,
     )
     desc = models.TextField(blank=True, null=True)
-    slug = models.SlugField(max_length=255, unique=True, blank=False,
-                            null=True)  # hyphenated lower case text of the title
+    slug = models.SlugField(max_length=255,
+                            unique=True,
+                            blank=False,
+                            null=True)
 
-    thumbnail = models.ImageField(upload_to='thumbnails/', null=True, blank=True)
-    video = models.FileField(upload_to='videos/', null=True, blank=True)
+    thumbnail = models.ImageField(upload_to='thumbnails/',
+                                  null=True,
+                                  blank=True)
+    video = models.FileField(upload_to='videos/',
+                             null=True,
+                             blank=True)
 
     class Meta:
         abstract = True
@@ -40,11 +46,17 @@ class Course(CourseCommonInfo):
     )
 
     title = models.CharField(max_length=250, unique=True)
-    authors = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='courses')
-    status = models.CharField(max_length=3, choices=COURSE_STATUS, default="UNP")
-    subscriptions = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='subscribed_courses',
+    authors = models.ManyToManyField(settings.AUTH_USER_MODEL,
+                                     related_name='courses')
+    status = models.CharField(max_length=3,
+                              choices=COURSE_STATUS,
+                              default="UNP")
+    subscriptions = models.ManyToManyField(settings.AUTH_USER_MODEL,
+                                           related_name='subscribed_courses',
                                            through='CourseSubscription')
-    price = models.DecimalField(max_digits=5, decimal_places=2, default=0.0)
+    price = models.DecimalField(max_digits=5,
+                                decimal_places=2,
+                                default=0.0)
 
     objects = models.Manager()
     published = PublishedCourseManager()
@@ -63,15 +75,19 @@ class Course(CourseCommonInfo):
 
 
 class CourseSubscription(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             on_delete=models.CASCADE)
+    course = models.ForeignKey(Course,
+                               on_delete=models.CASCADE)
     date_subscribed = models.DateField(null=True)
 
 
 class CourseClass(CourseCommonInfo):
     title = models.CharField(max_length=250)
     is_free = models.BooleanField(default=False)
-    course = models.ForeignKey(Course, related_name='classes', on_delete=models.CASCADE)
+    course = models.ForeignKey(Course,
+                               related_name='classes',
+                               on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title

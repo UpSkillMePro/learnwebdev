@@ -6,6 +6,8 @@ from courses.models import CourseClass, Course, CourseSubscription
 class CourseSubscriptionsInline(admin.TabularInline):
     model = CourseSubscription
     extra = 1
+
+
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
 
@@ -16,7 +18,8 @@ class CourseAdmin(admin.ModelAdmin):
 
     fieldsets = [
         ("Basic", {
-            "fields": ['title', 'slug', 'price', 'status', 'thumbnail', 'video']
+            "fields": ['title', 'slug', 'price', 'status', 'thumbnail',
+                       'video']
         }),
         ("Description", {
             "fields": ['short_desc', 'desc']

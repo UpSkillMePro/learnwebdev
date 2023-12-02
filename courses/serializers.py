@@ -23,5 +23,6 @@ class CourseClassSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = CourseClass
-        fields = ('course_slug', 'title', 'short_desc', 'desc', 'slug', 'course')
-        read_only_fields = ['course',]
+        fields = ('course_slug', 'title', 'short_desc',
+                  'desc', 'slug', 'course')
+        read_only_fields = ['course', ]
