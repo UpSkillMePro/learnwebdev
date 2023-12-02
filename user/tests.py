@@ -53,7 +53,9 @@ class ManageUserViewTest(APITestCase):
     def setUp(self):
         self.client = APIClient()
         self.user = User.objects.create_user(
-            username='testuser', password='testpass123', email='test@example.com')
+            username='testuser',
+            password='testpass123',
+            email='test@example.com')
         self.client.force_authenticate(user=self.user)
         self.url = reverse('user:update')
 
@@ -67,7 +69,8 @@ class ManageUserViewTest(APITestCase):
 
     def test_update_user(self):
         """Test updating the user profile for authenticated user."""
-        payload = {'email': 'newemail@example.com', 'password': 'newpassword123'}
+        payload = {'email': 'newemail@example.com',
+                   'password': 'newpassword123'}
 
         response = self.client.patch(self.url, payload)
 

@@ -10,7 +10,8 @@ class CourseListTest(APITestCase):
 
     def setUp(self):
         self.client = APIClient()
-        self.author_user = User.objects.create_user(username='author', password='testpass123')
+        self.author_user = User.objects.create_user(username='author',
+                                                    password='testpass123')
         author_group, _ = Group.objects.get_or_create(name='Author')
         self.author_user.groups.add(author_group)
         self.client.force_authenticate(user=self.author_user)
@@ -18,7 +19,8 @@ class CourseListTest(APITestCase):
 
     def test_list_courses(self):
         """Test listing courses for an author."""
-        Course.objects.create(title='Test Course').authors.set([self.author_user])
+        course = Course.objects.create(title='Test Course')
+        course.authors.set([self.author_user])
 
         response = self.client.get(self.url)
 
@@ -54,7 +56,8 @@ class CourseListTest(APITestCase):
 
     def test_create_course_non_author_user(self):
         """Test creating a course with a user who is not an author."""
-        non_author_user = User.objects.create_user(username='nonauthor', password='testpass123')
+        non_author_user = User.objects.create_user(username='nonauthor',
+                                                   password='testpass123')
         self.client.force_authenticate(user=non_author_user)
         payload = {'title': 'New Course', 'authors': [self.author_user.id]}
         response = self.client.post(self.url, payload)
