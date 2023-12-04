@@ -57,7 +57,8 @@ class CourseClassListTest(APITestCase):
 
     def test_create_course_class_non_author_user(self):
         """Test creating a course class with a user who is not an author."""
-        non_author_user = User.objects.create_user(username='nonauthor', password='testpass123')
+        non_author_user = User.objects.create_user(username='nonauthor',
+                                                   password='testpass123')
         self.client.force_authenticate(user=non_author_user)
         payload = {'title': 'New Class', 'course': self.course.id}
         response = self.client.post(self.url, payload)
