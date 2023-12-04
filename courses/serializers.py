@@ -16,7 +16,7 @@ class CourseClassSerializer(serializers.HyperlinkedModelSerializer):
     )
 
     course = serializers.HyperlinkedRelatedField(
-        view_name='course_detail',
+        view_name='course:course_detail',
         read_only=True,
         lookup_field='slug'
     )
