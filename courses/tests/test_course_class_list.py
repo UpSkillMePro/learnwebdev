@@ -55,8 +55,8 @@ class CourseClassListTest(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
-    def test_create_course_class_non_author_user(self):
-        """Test creating a course class with a user who is not an author."""
+    def test_create_course_class_non_owner_user(self):
+        """Test creating a course class with a user who is not an owner."""
         non_author_user = User.objects.create_user(username='nonauthor',
                                                    password='testpass123')
         self.client.force_authenticate(user=non_author_user)
