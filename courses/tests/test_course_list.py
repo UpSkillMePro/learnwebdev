@@ -10,8 +10,7 @@ class CourseListTest(APITestCase):
 
     def setUp(self):
         self.client = APIClient()
-        self.author_user = User.objects.create_user(username='author',
-                                                    password='testpass123')
+        self.author_user = User.objects.create_user(username='author', password='testpass123')
         author_group, _ = Group.objects.get_or_create(name='Author')
         self.author_user.groups.add(author_group)
         self.client.force_authenticate(user=self.author_user)
