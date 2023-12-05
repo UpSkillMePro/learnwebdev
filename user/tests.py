@@ -43,8 +43,8 @@ class CreateTokenViewTest(APITestCase):
         }
         response = self.client.post(self.url, payload)
 
-        self.assertIn('token', response.data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertIn('token', response.data)
 
 
 class ManageUserViewTest(APITestCase):

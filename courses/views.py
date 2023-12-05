@@ -56,7 +56,7 @@ class CourseDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = CourseSerializer
     lookup_field = 'slug'
     authentication_classes = [authentication.TokenAuthentication]
-    permission_classes = [permissions.IsAuthenticated, IsCourseOwnedBy]
+    permission_classes = [permissions.IsAuthenticated, IsAuthor, IsCourseOwnedBy]
 
 
 # 1277631c31e7f2a809ce2ed8c95160289ff6439c
