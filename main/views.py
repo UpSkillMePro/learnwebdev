@@ -1,4 +1,3 @@
-from django.db.models import Count
 from django.shortcuts import render
 
 from courses.models import Course, CourseClass
@@ -27,7 +26,8 @@ def courses(request):
     :return:
     """
     context = {
-        'courses': Course.objects.prefetch_related('classes', 'subscriptions').all()
+        'courses': Course.objects.prefetch_related('classes',
+                                                   'subscriptions').all()
     }
 
     return render(request, 'pages/courses.html', context)
