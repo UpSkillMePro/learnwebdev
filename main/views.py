@@ -1,7 +1,7 @@
 from django.db.models import Count
 from django.shortcuts import render
 
-from courses.models import Course
+from courses.models import Course, CourseClass
 
 
 # Create your views here.
@@ -27,10 +27,23 @@ def courses(request):
     :return:
     """
     context = {
-        'courses': Course.objects.all()
+        'courses': Course.objects.prefetch_related('classes', 'subscriptions').all()
     }
 
     return render(request, 'pages/courses.html', context)
+
+
+def classes(request):
+    """Display a list of classes
+
+    :param request:
+    :return:
+    """
+    context = {
+        'classes': CourseClass.objects.select_related('course').all()
+    }
+
+    return render(request, 'pages/classes.html', context)
 
 
 def show_course(request, slug):

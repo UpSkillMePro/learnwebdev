@@ -1,0 +1,40 @@
+{% extends "layouts/public_base.html" %}
+
+{% block description %}
+
+{% endblock %}
+
+{% block keywords %}
+
+{% endblock %}
+
+{% block title %}
+  List of Classes
+{% endblock %}
+
+{% block page-header %}
+  Classes
+{% endblock %}
+
+{% block content %}
+  <div class="row py-5">
+    <div class="col-xs-12">
+      <table class="table table-bordered table-condensed">
+        <thead>
+        <tr>
+          <th>Title</th>
+          <th>Course</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for class in classes %}
+          <tr>
+            <td>{{ class }}</td>
+            <td>{{ class.course }}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+{% endblock %}
